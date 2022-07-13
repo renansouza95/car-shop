@@ -1,20 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
-import { CarService as ICarService } from '../interfaces/CarService';
-import { CarController as ICarController } from '../interfaces/CarController';
+import Controller from './GenericController';
+import { Car } from '../interfaces/CarInterface';
+import CarService from '../services/CarService';
+// import { CarService as ICarService } from '../interfaces/CarService';
+// import { CarController as ICarController } from '../interfaces/CarController';
 
-export default class CarController implements ICarController {
-  private _carService: ICarService;
+export default class CarController extends Controller<Car> {
+  // private _carService: ICarService;
 
-  constructor(carService: ICarService) {
-    this._carService = carService;
+  private _route: string;
+
+  constructor(service = new CarService(), route = '/cars') {
+    super(service);
+    this._route = route;
   }
 
-  public async create(req: Request, res: Response, next: NextFunction):
-  Promise<Response | void> {
+  get route() { return this._route; }
+
+  public async create(req: Request, res: Response, next: NextFunction)
+    : Promise<Response | void> {
     try {
       const { model, year, color, status,
         buyValue, doorsQty, seatsQty } = req.body;
-      const created = await this._carService.create({
+      const created = await this.service.create({
         model,
         year,
         color,
@@ -29,10 +37,10 @@ export default class CarController implements ICarController {
     }
   }
 
-  public async read(req: Request, res: Response, next: NextFunction):
+  public async read(_req: Request, res: Response, next: NextFunction):
   Promise<Response | void> {
     try {
-      const cars = await this._carService.read();
+      const cars = await this.service.read();
       return res.status(200).json(cars);
     } catch (error) {
       next(error);
@@ -43,7 +51,7 @@ export default class CarController implements ICarController {
   Promise<Response | void> {
     try {
       const { id } = req.params;
-      const cars = await this._carService.readOne(id);
+      const cars = await this.service.readOne(id);
       return res.status(200).json(cars);
     } catch (error) {
       next(error);
@@ -57,7 +65,7 @@ export default class CarController implements ICarController {
       const { model, year, color, status,
         buyValue, doorsQty, seatsQty } = req.body;
       const car = { model, year, color, status, buyValue, doorsQty, seatsQty };
-      const updated = await this._carService.update(id, car);
+      const updated = await this.service.update(id, car);
       return res.status(200).json(updated);
     } catch (error) {
       next(error);
@@ -68,7 +76,7 @@ export default class CarController implements ICarController {
   Promise<Response | void> {
     try {
       const { id } = req.params;
-      const car = await this._carService.delete(id);
+      const car = await this.service.delete(id);
       return res.status(200).json(car);
     } catch (error) {
       next(error);

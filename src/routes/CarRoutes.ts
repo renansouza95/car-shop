@@ -27,10 +27,26 @@ export default class CustomRouter<T> {
   }
 
   public addRoute(controller: Controller<T>, route: string = controller.route) {
-    this.router.get(route, controller.read);
-    this.router.get(`${route}:/id`, controller.readOne);
-    this.router.post(route, controller.create);
-    this.router.put(`${route}:/id`, controller.update);
-    this.router.delete(`${route}:/id`, controller.delete);
+    this.router.get(route, (req, res, next) => controller.read(req, res, next));
+  
+    this.router.get(
+      `${route}:/id`,
+      (req, res, next) => controller.readOne(req, res, next),
+    );
+      
+    this.router.post(
+      route,
+      (req, res, next) => controller.create(req, res, next),
+    );
+
+    this.router.put(
+      `${route}:/id`,
+      (req, res, next) => controller.update(req, res, next),
+    );
+
+    this.router.delete(
+      `${route}:/id`,
+      (req, res, next) => controller.delete(req, res, next),
+    );
   }
 }

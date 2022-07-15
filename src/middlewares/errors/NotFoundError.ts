@@ -1,7 +1,7 @@
 import CustomError from './CustomError';
 
-export default class BadRequest extends CustomError {
+export default class NotFoundError extends CustomError {
   constructor(message: string) {
-    super(message, 400);
+    super(message, 404);
   }
 }

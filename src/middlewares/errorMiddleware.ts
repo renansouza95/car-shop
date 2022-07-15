@@ -10,7 +10,7 @@ export default function errorMiddleware(
 ) {
   // se for um erro derivado do custom error eu posso pegar o status code do erro e retornar
   if (error instanceof CustomError) {
-    return res.status(error.statusCode).json({ message: error.message });
+    return res.status(error.statusCode).json({ error: error.message });
   }
   // se for um error de validação do mongoose posso retornar 400 e a mensagem do erro
   if (error instanceof Error.ValidationError) {

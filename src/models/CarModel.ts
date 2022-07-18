@@ -7,10 +7,3 @@ export default class CarModel extends GenericModel<Car> {
     super(modelMongoose);
   }
 }
-
-// export default class CarModel extends GenericModel<Car> {
-//   constructor(modelMongoose: Model<Car>) {
-//     super(modelMongoose);
-//     this._modelMongoose = modelMongoose;
-//   }
-// }

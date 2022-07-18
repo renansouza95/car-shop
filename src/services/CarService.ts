@@ -3,18 +3,13 @@ import BadRequestError from '../middlewares/errors/BadRequestError';
 import CarModel from '../models/CarModel';
 import { Car as ICar } from '../interfaces/CarInterface';
 import GenericService from './GenericService';
-// import { CarService as ICarService } from '../interfaces/CarService';
-// import { Model } from '../interfaces/ModelInterface';
 
 const ERROR_MSG = 'car not found';
 
 export default class CarService extends GenericService<ICar> {
-  // private _carModel: Model<ICar>;
-
   constructor(model = new CarModel()) {
     super(model);
     // o carModel herda _model do constructor da GenericService
-    // this._carModel = carModel;
   }
 
   async create(car: ICar): Promise<ICar> {

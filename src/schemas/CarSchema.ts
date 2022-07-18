@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { Car } from '../interfaces/CarInterface';
 
-export interface CarDocument extends Car, Document {}
+// export interface CarDocument extends Car, Document {}
 
 const carSchema = new Schema<Car>({
   model: { type: String, required: true, minlength: 3 },

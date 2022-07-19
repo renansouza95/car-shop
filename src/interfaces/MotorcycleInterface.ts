@@ -1,6 +1,6 @@
 import { Vehicle } from './VehicleInterface';
 
-enum Categories {
+export enum Categories {
   'Street',
   'Custom',
   'Trail',

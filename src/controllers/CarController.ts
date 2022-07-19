@@ -74,7 +74,7 @@ export default class CarController extends Controller<Car> {
     try {
       const { id } = req.params;
       const car = await this.service.delete(id);
-      return res.status(200).json(car);
+      return res.status(204).json(car);
     } catch (error) {
       next(error);
     }

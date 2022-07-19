@@ -38,16 +38,12 @@ class CarService extends GenericService<ICar> implements ICarService {
     if (verifyBody) throw new BadRequestError('Invalid fields');
     await this.readOne(id);
     const updated = await this._model.update(id, car);
-    if (!updated) throw new BadRequestError(BADREQUEST);
     return updated;
   }
 
   async delete(id: string): Promise<ICar | null> {
-    if (id.length < 24) {
-      throw new BadRequestError(BADREQUEST);
-    }
+    await this.readOne(id);
     const car = await this._model.delete(id);
-    if (!car) throw new NotFoundError(NOTFOUND);
     return car;
   }
 }

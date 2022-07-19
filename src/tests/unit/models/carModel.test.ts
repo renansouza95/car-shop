@@ -3,7 +3,7 @@ import sinon, { SinonStub } from 'sinon';
 import CarModel from '../../../models/CarModel';
 import { Model } from 'mongoose';
 import carMongooseModel from '../../../schemas/CarSchema';
-import { carMock } from '../mocks/CarMocks';
+import { carMock, carIdMock } from '../mocks/CarMocks';
 import mongoose from 'mongoose';
 
 describe('Car Model', () => {
@@ -54,7 +54,7 @@ describe('Car Model', () => {
       it('Returns correct data', async () => {
         const carModel = new CarModel(carMongooseModel);
 
-        const car = await carModel.readOne('1');
+        const car = await carModel.readOne(carIdMock);
   
         expect(car).to.be.deep.equal(carMock);
       });
@@ -75,7 +75,7 @@ describe('Car Model', () => {
       it('Returns null if id does not exist', async () => {
         const carModel = new CarModel(carMongooseModel);
 
-        const car = await carModel.readOne('99999999');
+        const car = await carModel.readOne('invalid_id');
   
         expect(car).to.be.equal(null);
       });
@@ -99,7 +99,7 @@ describe('Car Model', () => {
       it('Updates and returns correct data', async () => {
         const carModel = new CarModel(carMongooseModel);
   
-        const deleted = await carModel.update('1', carMock);
+        const deleted = await carModel.update(carIdMock, carMock);
   
         expect(deleted).to.be.deep.equal(carMock);
       });
@@ -120,7 +120,7 @@ describe('Car Model', () => {
       it('Returns null if id does not exist', async () => {
         const carModel = new CarModel(carMongooseModel);
   
-        const deleted = await carModel.update('99999999', carMock);
+        const deleted = await carModel.update('invalid_id', carMock);
   
         expect(deleted).to.be.equal(null);
       });
@@ -144,7 +144,7 @@ describe('Car Model', () => {
       it('Deletes and returns correct data', async () => {
         const carModel = new CarModel(carMongooseModel);
   
-        const deleted = await carModel.delete('1');
+        const deleted = await carModel.delete(carIdMock);
   
         expect(deleted).to.be.deep.equal(carMock);
       });
@@ -165,7 +165,7 @@ describe('Car Model', () => {
       it('Returns null if id does not exist', async () => {
         const carModel = new CarModel(carMongooseModel);
     
-        const deleted = await carModel.delete('99999999');
+        const deleted = await carModel.delete('invalid_id');
   
         expect(deleted).to.be.equal(null);
       });

@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import GenericService from '../services/GenericService';
+import { Service as IGenericService } from '../interfaces/ServiceInterface';
+// import GenericService from '../services/GenericService';
 
 export default abstract class GenericController<T> {
   abstract route: string;
 
-  constructor(protected service: GenericService<T>) {}
+  constructor(protected service: IGenericService<T>) {}
 
   abstract create(
     req: Request,

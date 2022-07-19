@@ -3,11 +3,15 @@ import BadRequestError from '../middlewares/errors/BadRequestError';
 import CarModel from '../models/CarModel';
 import { Car as ICar } from '../interfaces/CarInterface';
 import GenericService from './GenericService';
+import { Model } from '../interfaces/ModelInterface';
+import { CarService as ICarService } from '../interfaces/CarService';
 
-const ERROR_MSG = 'car not found';
+const NOTFOUND = 'car not found';
 
-export default class CarService extends GenericService<ICar> {
-  constructor(model = new CarModel()) {
+const BADREQUEST = 'Id must have 24 hexadecimal characters';
+
+class CarService extends GenericService<ICar> implements ICarService {
+  constructor(model: Model<ICar> = new CarModel()) {
     super(model);
     // o carModel herda _model do constructor da GenericService
   }
@@ -22,7 +26,7 @@ export default class CarService extends GenericService<ICar> {
 
   async readOne(id: string): Promise<ICar | null> {
     if (id.length < 24) {
-      throw new BadRequestError('Id must have 24 hexadecimal characters');
+      throw new BadRequestError(BADREQUEST);
     }
     const car = await this._model.readOne(id);
     if (!car) throw new NotFoundError('Object not found');
@@ -30,14 +34,22 @@ export default class CarService extends GenericService<ICar> {
   }
 
   async update(id: string, car: ICar): Promise<ICar | null> {
+    if (id.length < 24) {
+      throw new BadRequestError(BADREQUEST);
+    }
     const updated = await this._model.update(id, car);
-    if (!updated) throw new NotFoundError(ERROR_MSG);
+    if (!updated) throw new NotFoundError(NOTFOUND);
     return updated;
   }
 
   async delete(id: string): Promise<ICar | null> {
+    if (id.length < 24) {
+      throw new BadRequestError(BADREQUEST);
+    }
     const car = await this._model.delete(id);
-    if (!car) throw new NotFoundError(ERROR_MSG);
+    if (!car) throw new NotFoundError(NOTFOUND);
     return car;
   }
 }
+
+export default CarService;

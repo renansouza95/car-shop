@@ -1,6 +1,7 @@
 import { Model } from '../interfaces/ModelInterface';
+import { Service as IGenericService } from '../interfaces/ServiceInterface';
 
-export default abstract class GenericService<T> {
+export default abstract class GenericService<T> implements IGenericService<T> {
   protected _model: Model<T>;
 
   constructor(model: Model<T>) {

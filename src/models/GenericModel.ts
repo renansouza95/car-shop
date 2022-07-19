@@ -3,6 +3,7 @@ import { Model as ModelInterface } from '../interfaces/ModelInterface';
 import BadRequestError from '../middlewares/errors/BadRequestError';
 
 const ERROR_MSG = 'Id must have 24 hexadecimal characters';
+
 export default abstract class GenericModel<T> implements ModelInterface<T> {
   protected _modelMongoose: Model<T>;
 

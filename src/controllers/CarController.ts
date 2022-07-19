@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import Controller from './GenericController';
 import { Car } from '../interfaces/CarInterface';
 import CarService from '../services/CarService';
+import { CarService as ICarService } from '../interfaces/CarService';
 
 export default class CarController extends Controller<Car> {
   private _route: string;
 
-  constructor(service = new CarService(), route = '/cars') {
+  constructor(service: ICarService = new CarService(), route = '/cars') {
     super(service);
     this._route = route;
   }

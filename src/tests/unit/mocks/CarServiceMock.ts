@@ -1,20 +1,27 @@
 import { Car } from "../../../interfaces/CarInterface";
 import { Service } from "../../../interfaces/ServiceInterface";
+import { carMock, carMockAndId } from "./CarMocks";
 
 export class CarServiceMock implements Service<Car> {
-  create(entity: Car): Promise<Car> {
-    throw new Error("Method not implemented.");
+  async create(entity: Car): Promise<Car> {
+    return entity;
   }
-  read(): Promise<Car[]> {
-    throw new Error("Method not implemented.");
+  async read(): Promise<Car[]> {
+    return [carMock];
   }
-  readOne(id: string): Promise<Car | null> {
-    throw new Error("Method not implemented.");
+  async readOne(id: string): Promise<Car | null> {
+    if (id.length < 24) return null;
+    if (carMockAndId._id !== id) return null;
+    return carMock;
   }
-  update(id: string, entity: Car): Promise<Car | null> {
-    throw new Error("Method not implemented.");
+  async update(id: string, entity: Car): Promise<Car | null> {
+    if (id.length < 24) return null;
+    if (carMockAndId._id !== id) return null;
+    return entity;
   }
-  delete(id: string): Promise<Car | null> {
-    throw new Error("Method not implemented.");
+  async delete(id: string): Promise<Car | null> {
+    if (id.length < 24) return null;
+    if (carMockAndId._id !== id) return null;
+    return carMock;
   }
 }

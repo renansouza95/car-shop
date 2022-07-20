@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import carMongooseModel from '../../../schemas/CarSchema';
 import { carMock, carIdMock } from '../mocks/CarMocks';
 import mongoose from 'mongoose';
+import BadRequestError from '../../../middlewares/errors/BadRequestError';
 
 describe('Car Model', () => {
   describe('Create car', () => {
@@ -80,6 +81,28 @@ describe('Car Model', () => {
         expect(car).to.be.equal(null);
       });
     });
+
+    describe('Error', () => {
+  
+      before(() => {
+        sinon.stub(mongoose, 'isValidObjectId').returns(false),
+        sinon.stub(Model, 'findById').resolves(null)
+      });
+
+      after(() => {
+        (mongoose.isValidObjectId as SinonStub).restore(),
+        (Model.findById as SinonStub).restore()
+      });
+
+      it('Throws bad request error if id is invalid', async () => {
+        try {
+          const carModel = new CarModel(carMongooseModel);
+          await carModel.readOne('invalid_id');
+        } catch (error) {
+          expect(error instanceof BadRequestError).to.be.true;
+        }
+      });
+    });
   });
 
   describe('Update car by id', () => {
@@ -125,6 +148,28 @@ describe('Car Model', () => {
         expect(updated).to.be.equal(null);
       });
     });
+
+    describe('Error', () => {
+  
+      before(() => {
+        sinon.stub(mongoose, 'isValidObjectId').returns(false),
+        sinon.stub(Model, 'findOneAndUpdate').resolves(null)
+      });
+
+      after(() => {
+        (mongoose.isValidObjectId as SinonStub).restore(),
+        (Model.findOneAndUpdate as SinonStub).restore()
+      });
+
+      it('Throws bad request error if id is invalid', async () => {
+        try {
+          const carModel = new CarModel(carMongooseModel);
+          await carModel.update('invalid_id', carMock);
+        } catch (error) {
+          expect(error instanceof BadRequestError).to.be.true;
+        }
+      });
+    });
   });
 
   describe('Delete car by id', () => {
@@ -168,6 +213,28 @@ describe('Car Model', () => {
         const deleted = await carModel.delete('invalid_id');
   
         expect(deleted).to.be.equal(null);
+      });
+    });
+
+    describe('Error', () => {
+  
+      before(() => {
+        sinon.stub(mongoose, 'isValidObjectId').returns(false),
+        sinon.stub(Model, 'findOneAndDelete').resolves(null)
+      });
+
+      after(() => {
+        (mongoose.isValidObjectId as SinonStub).restore(),
+        (Model.findOneAndDelete as SinonStub).restore()
+      });
+
+      it('Throws bad request error if id is invalid', async () => {
+        try {
+          const carModel = new CarModel(carMongooseModel);
+          await carModel.delete('invalid_id');
+        } catch (error) {
+          expect(error instanceof BadRequestError).to.be.true;
+        }
       });
     });
   });

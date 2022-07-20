@@ -99,9 +99,9 @@ describe('Car Model', () => {
       it('Updates and returns correct data', async () => {
         const carModel = new CarModel(carMongooseModel);
   
-        const deleted = await carModel.update(carIdMock, carMock);
+        const updated = await carModel.update(carIdMock, carMock);
   
-        expect(deleted).to.be.deep.equal(carMock);
+        expect(updated).to.be.deep.equal(carMock);
       });
     });
 
@@ -120,9 +120,9 @@ describe('Car Model', () => {
       it('Returns null if id does not exist', async () => {
         const carModel = new CarModel(carMongooseModel);
   
-        const deleted = await carModel.update('invalid_id', carMock);
+        const updated = await carModel.update('invalid_id', carMock);
   
-        expect(deleted).to.be.equal(null);
+        expect(updated).to.be.equal(null);
       });
     });
   });

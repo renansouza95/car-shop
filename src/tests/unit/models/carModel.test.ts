@@ -39,7 +39,6 @@ describe('Car Model', () => {
   });
 
   describe('Find car by id', () => {
-
     describe('Success', () => {
 
       before(() => {
@@ -106,7 +105,6 @@ describe('Car Model', () => {
   });
 
   describe('Update car by id', () => {
-
     describe('Success', () => {
 
       before(() => {
@@ -173,7 +171,6 @@ describe('Car Model', () => {
   });
 
   describe('Delete car by id', () => {
-
     describe('Success', () => {
 
       before(() => {

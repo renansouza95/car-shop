@@ -8,7 +8,6 @@ import mongoose from 'mongoose';
 import BadRequestError from '../../../middlewares/errors/BadRequestError';
 
 describe('Motorcycle Model', () => {
-
   describe('Create motorcycle', () => {
     
     before(() => sinon.stub(Model, 'create').resolves(motoMock));
@@ -40,7 +39,6 @@ describe('Motorcycle Model', () => {
   });
 
   describe('Find motorcycle by id', () => {
-
     describe('Success', () => {
 
       before(() => {
@@ -107,7 +105,6 @@ describe('Motorcycle Model', () => {
   });
 
   describe('Update motorcycle by id', () => {
-
     describe('Success', () => {
 
       before(() => {
@@ -174,7 +171,6 @@ describe('Motorcycle Model', () => {
   });
 
   describe('Delete motorcycle by id', () => {
-
     describe('Success', () => {
 
       before(() => {

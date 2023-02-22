@@ -1,16 +1,30 @@
-# 🚧 README em construção 🚧
+# Bem vindo ao projeto Car Shop!
 
-<!-- Olá, Tryber!
+Este é um projeto que foi desenvolvido durante o curso de Desenvolvimento Web na Trybe.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
 
-É essencial que você preencha esse documento por conta própria, ok?
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+## Habilidades Desenvolvidas
+  * Utilizar os Princípios de Programação Orientada a Objetos (`POO`) para construção de uma API com CRUD
+  
+  * MongoDB
+  
+  * Criação de testes unitários
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
 
--->
+
+## Funções
+Neste projeto foi desenvolvido uma `API` com `CRUD` para gerenciar uma concessionária de veículos.
+
+
+
+### Instruções para clonar o projeto
+
+1. Clone o repositório
+  * `git clone git@github.com:renansouza95/car-shop.git`.
+  * Entre na pasta do repositório que você acabou de clonar:
+    * `cd car-shop`
+
+2. Instale as dependências e inicialize o projeto
+  * Instale as dependências:
+    * `npm install`
